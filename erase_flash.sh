@@ -1,0 +1,1 @@
+idf.py -p $1 erase-flash

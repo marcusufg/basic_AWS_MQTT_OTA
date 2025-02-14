@@ -1,0 +1,9 @@
+/build/*
+/certs/*
+/.history/*
+/*.code-workspace
+.vscode/
+./sdkconfig
+./sdkconfig.old
+.DS_Store
+ecdsasigner*

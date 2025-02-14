@@ -1,0 +1,40 @@
+set(srcs "stdin_out.c"
+         "connect.c"
+         "wifi_connect.c")
+
+idf_component_register(
+    SRCS "${srcs}"
+    INCLUDE_DIRS 
+        "include"
+        "${PROJECT_DIR}/main/components/shared/include/"
+        "${PROJECT_DIR}/libraries/backoffAlgorithm/backoffAlgorithm/source/include/"
+        "${PROJECT_DIR}/libraries/ota-for-aws-iot-embedded-sdk/ota-for-aws-iot-embedded-sdk/source/include/"
+        "${PROJECT_DIR}/libraries/ota-for-aws-iot-embedded-sdk/config/"
+        "${PROJECT_DIR}/libraries/ota-for-aws-iot-embedded-sdk/port/"
+        "${PROJECT_DIR}/libraries/ota-for-aws-iot-embedded-sdk/ota-for-aws-iot-embedded-sdk/source/portable/os/"
+        "${PROJECT_DIR}/libraries/common/logging/"
+        "${PROJECT_DIR}/libraries/common/posix_compat/"
+        "${PROJECT_DIR}/libraries/corePKCS11/corePKCS11/source/include"
+        "${PROJECT_DIR}/libraries/corePKCS11/corePKCS11/source/dependency/3rdparty/mbedtls_utils"
+    PRIV_REQUIRES 
+        esp_netif 
+        driver 
+        esp_wifi 
+        vfs
+        shared 
+        color_print 
+        cJSON
+        coreMQTT
+        corePKCS11
+        nvs_flash 
+        spi_flash 
+        esp_partition 
+        pthread
+        esp_event
+        wifi_provisioning
+        mbedtls
+        espressif__mdns
+        mdns						
+        bootloader_support 
+        protocol_common_conection_functions
+    )

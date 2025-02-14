@@ -1,0 +1,2 @@
+idf.py build && 
+python start_ota_stream.py --profile default --otasigningprofile Assin_OTA_2021 --name $1 --role JITPbasic_OTA --s3bucket ota-freertos --signingcertificateid 37182cfe-e466-4e63-a7b1-e6eba77134c7 --filelocation build/basic_OTA.bin

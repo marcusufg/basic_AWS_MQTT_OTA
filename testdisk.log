@@ -1,0 +1,26 @@
+
+
+Thu Jun 13 09:38:48 2024
+Command line: TestDisk
+
+TestDisk 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 23.1.0 (Darwin Kernel Version 23.1.0: Mon Oct  9 21:27:24 PDT 2023; root:xnu-10002.41.9~6/RELEASE_ARM64_T6000) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /dev/disk6 - 176 MB / 168 MiB - 344144 sectors (RO), sector size=512
+Disk /dev/disk7 - 57 MB / 54 MiB - 112032 sectors (RO), sector size=512
+Disk /dev/disk9 - 176 MB / 168 MiB - 344144 sectors (RO), sector size=512
+Disk /dev/disk10 - 669 MB / 638 MiB - 1306766 sectors (RO), sector size=512
+Disk /dev/disk11 - 669 MB / 638 MiB - 1306766 sectors (RO), sector size=512
+Disk /dev/rdisk6 - 176 MB / 168 MiB - 344144 sectors (RO), sector size=512
+Disk /dev/rdisk7 - 57 MB / 54 MiB - 112032 sectors (RO), sector size=512
+Disk /dev/rdisk9 - 176 MB / 168 MiB - 344144 sectors (RO), sector size=512
+Disk /dev/rdisk10 - 669 MB / 638 MiB - 1306766 sectors (RO), sector size=512
+Disk /dev/rdisk11 - 669 MB / 638 MiB - 1306766 sectors (RO), sector size=512
+
+
+TestDisk exited normally.

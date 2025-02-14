@@ -1,0 +1,1 @@
+cls && idf.py build
