@@ -14,7 +14,7 @@ set(COMPONENT_ADD_INCLUDEDIRS
 	"${PROJECT_DIR}/libraries/corePKCS11/corePKCS11/source/include"
 	"${PROJECT_DIR}/libraries/corePKCS11/corePKCS11/source/dependency/3rdparty/mbedtls_utils"
 	"${PROJECT_DIR}/libraries/coreMQTT/coreMQTT//source/include"
-	"${PROJECT_DIR}/libraries/coreMQTT-Agent/coreMQTT-Agent//source/include"
+	# "${PROJECT_DIR}/libraries/coreMQTT-Agent/coreMQTT-Agent//source/include"
 )
 
 idf_component_register(
@@ -39,16 +39,15 @@ idf_component_register(
 						# esp_modem
 						lwip
 						corePKCS11
-						# nvs_flash 
-						# spi_flash 
-						# esp_partition 
-						# pthread 
+						nvs_flash 
+						spi_flash 
+						esp_partition 
+						pthread 
 						esp_netif 
 						esp_wifi
-						# esp_adc
-						# esp_timer
-						# esp_rom
-						# esp_http_client
+						esp_adc
+						esp_timer
+						esp_rom
 						soc
 						ulp
 						hal

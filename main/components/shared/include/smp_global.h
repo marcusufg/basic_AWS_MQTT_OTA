@@ -1,38 +1,5 @@
 #include "smp_config.h"
 
-/* ========== SYSTEM DEFINES ========== */
-#define delay_ms(ms)                    vTaskDelay(pdMS_TO_TICKS(ms))
-#define KEEP_ALIVE_SECONDS              ( 60 )
-#define MQTT_TIMEOUT_MS                 ( 10000 )
-#define WILL_TOPIC_NAME                 "basic_OTA/will"
-#define WILL_TOPIC_NAME_LENGTH          ( ( uint16_t ) ( sizeof( WILL_TOPIC_NAME ) - 1 ) )
-#define WILL_MESSAGE                    "MQTT connection lost."
-#define WILL_MESSAGE_LENGTH             ( ( size_t ) ( sizeof( WILL_MESSAGE ) - 1 ) )
-#define PUBLISH_RETRY_LIMIT             ( 10 )
-#define PUBLISH_RETRY_MS                ( 1000 )
-
-#define printf_enabled                              1
-
-/* ========== LOCAL PRINT COLOR DEFINITIONS ========== */
-#define LOCAL_COLOR_PRINT_ALERT             COLOR_PRINT_RED
-#define LOCAL_COLOR_PRINT_HARDWARE          COLOR_PRINT_BLUE
-#define LOCAL_COLOR_PRINT_COMMUNICATION     COLOR_PRINT_PURPLE
-#define LOCAL_COLOR_PRINT_TASK              COLOR_PRINT_CYAN
-#define LOCAL_COLOR_PRINT_INFO              COLOR_PRINT_GREEN
-#define LOCAL_COLOR_PRINT_DEBUG             COLOR_PRINT_BROWN
-
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
-#define BYTE_TO_BINARY(byte)  \
-(byte & 0x80 ? '1' : '0'), \
-(byte & 0x40 ? '1' : '0'), \
-(byte & 0x20 ? '1' : '0'), \
-(byte & 0x10 ? '1' : '0'), \
-(byte & 0x08 ? '1' : '0'), \
-(byte & 0x04 ? '1' : '0'), \
-(byte & 0x02 ? '1' : '0'), \
-(byte & 0x01 ? '1' : '0')
-
-
 /* ========== C INCLUDES ========== */
 #include <stdio.h>
 #include <stddef.h>
@@ -74,6 +41,7 @@
 #include "esp_partition.h"
 #include "esp_image_format.h"
 #include "esp_secure_boot.h"
+#include "esp_private/esp_clk.h"
 #if CONFIG_IDF_TARGET_ESP32
     #include "esp32/rom/ets_sys.h"    
 #elif CONFIG_IDF_TARGET_ESP32S2
@@ -162,6 +130,40 @@
 #include "diskio.h"
 #include "ff.h"
 
+
+/* ========== SYSTEM DEFINES ========== */
+#define delay_ms(ms)                    vTaskDelay(pdMS_TO_TICKS(ms))
+#define KEEP_ALIVE_SECONDS              ( 60 )
+#define MQTT_TIMEOUT_MS                 ( 10000 )
+#define WILL_TOPIC_NAME                 "basic_OTA/will"
+#define WILL_TOPIC_NAME_LENGTH          ( ( uint16_t ) ( sizeof( WILL_TOPIC_NAME ) - 1 ) )
+#define WILL_MESSAGE                    "MQTT connection lost."
+#define WILL_MESSAGE_LENGTH             ( ( size_t ) ( sizeof( WILL_MESSAGE ) - 1 ) )
+#define PUBLISH_RETRY_LIMIT             ( 10 )
+#define PUBLISH_RETRY_MS                ( 1000 )
+
+#define printf_enabled                              1
+
+/* ========== LOCAL PRINT COLOR DEFINITIONS ========== */
+#define LOCAL_COLOR_PRINT_ALERT             COLOR_PRINT_RED
+#define LOCAL_COLOR_PRINT_HARDWARE          COLOR_PRINT_BLUE
+#define LOCAL_COLOR_PRINT_COMMUNICATION     COLOR_PRINT_PURPLE
+#define LOCAL_COLOR_PRINT_TASK              COLOR_PRINT_CYAN
+#define LOCAL_COLOR_PRINT_INFO              COLOR_PRINT_GREEN
+#define LOCAL_COLOR_PRINT_DEBUG             COLOR_PRINT_BROWN
+
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY(byte)  \
+(byte & 0x80 ? '1' : '0'), \
+(byte & 0x40 ? '1' : '0'), \
+(byte & 0x20 ? '1' : '0'), \
+(byte & 0x10 ? '1' : '0'), \
+(byte & 0x08 ? '1' : '0'), \
+(byte & 0x04 ? '1' : '0'), \
+(byte & 0x02 ? '1' : '0'), \
+(byte & 0x01 ? '1' : '0')
+
+
 // alternative way to pass certificates to the MQTT connection
 extern const char root_cert_auth_pem_start[] asm("_binary_root_cert_auth_pem_start");
 extern const char root_cert_auth_pem_end[] asm("_binary_root_cert_auth_pem_end");
@@ -171,9 +173,9 @@ extern const char client_key_pem_start[] asm("_binary_client_key_start");
 extern const char client_key_pem_end[] asm("_binary_client_key_end");
 
 int smp_main( int argc, char** argv );
-
 int mqtt_publish_wifi(MQTTContext_t* pxMqttContext, const char* payload, const char* submission_topic, bool useretained);
 
+void send_infosys();
 void mqtt_subscriptions_callbacks(char* payload, size_t payload_length, char* topic_name, size_t topic_length);
     
 

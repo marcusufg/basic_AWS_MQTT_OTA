@@ -6,7 +6,7 @@ char* wifi_pwd = "100\%Simemap";
 
 const AppVersion32_t appFirmwareVersion =
 {
-    .u.x.major = 1,   //v.4: all new GSM connection method/OTA ready
+    .u.x.major = 1,
     .u.x.minor = 1,
     .u.x.build = 1,
 };
@@ -86,10 +86,10 @@ void app_main(void)
 
     enableFlushAfterPrintf();
 
-    ESP_LOGI("smp_main", "[APP] Starting..");
-    ESP_LOGI("smp_main", "[APP] Free memory: %"PRIu32" bytes", esp_get_free_heap_size());
-    ESP_LOGI("smp_main", "[APP] IDF version: %s", esp_get_idf_version());
-    ESP_LOGI("smp_main", "esp_clk_cpu_freq: %d", esp_clk_cpu_freq());
+    ESP_LOGI("main", "[APP] Starting..");
+    ESP_LOGI("main", "[APP] Free memory: %"PRIu32" bytes", esp_get_free_heap_size());
+    ESP_LOGI("main", "[APP] IDF version: %s", esp_get_idf_version());
+    ESP_LOGI("main", "esp_clk_cpu_freq: %d", esp_clk_cpu_freq());
 
     /* Start task wdt with 120 seconds */
     esp_task_wdt_config_t wdt_config = 
@@ -102,11 +102,11 @@ void app_main(void)
     esp_task_wdt_reconfigure(&wdt_config);
 
     asprintf(&v_fw, "%u.%u.%u", appFirmwareVersion.u.x.major, appFirmwareVersion.u.x.minor, appFirmwareVersion.u.x.build);
-    color_printf(LOG_COLOR_BLUE,"\nFirmware v. %u.%u.%u\n", appFirmwareVersion.u.x.major, appFirmwareVersion.u.x.minor, appFirmwareVersion.u.x.build);
+    ESP_LOGI("main", "\nFirmware v. %u.%u.%u\n", appFirmwareVersion.u.x.major, appFirmwareVersion.u.x.minor, appFirmwareVersion.u.x.build);
 
     esp_read_mac(mac, ESP_MAC_WIFI_STA);
     asprintf(&Id, "%02x%02x%02x%02x%02x%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
-    color_printf(LOCAL_COLOR_PRINT_INFO, "MAC: %s", Id);
+    ESP_LOGI("main", "MAC: %s", Id);
 
     smp_connect();
 
